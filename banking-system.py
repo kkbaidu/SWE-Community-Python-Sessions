@@ -38,3 +38,6 @@ kofi_balance = kofi_account.get_balance()
 print(f"Kofi's balance is ${kofi_balance}.00") # $820.00
 
 
+# In our next session on Tuesday, we will explore Inheritance and Polymorphism 
+# by creating different types of accounts (e.g., SavingsAccount, CheckingAccount) 
+# that inherit from the Account class and override certain methods.

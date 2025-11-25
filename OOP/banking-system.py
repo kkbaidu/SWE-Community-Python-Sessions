@@ -28,16 +28,41 @@ class Account:
         return self.__balance
     
 
+# Inheritance
+class SavingAccount(Account):
+    def __init__(self, owner, balance=0, interest_rate=0.05):
+        super().__init__(owner, balance)
+        self.interest_rate = interest_rate
 
-kofi_account = Account("Kofi", 50)
+    def add_interest(self):
+        interest = self.get_balance() * self.interest_rate
+        self.deposit(interest)
 
-kofi_account.deposit(770)
+# Method Overriding
+# Method Overloading
 
-kofi_balance = kofi_account.get_balance() 
+class CheckingAccount(Account):
+    def __init__(self, owner, balance=0, overdraft_limit=100):
+        super().__init__(owner, balance)
+        self.overdraft_limit = overdraft_limit
 
-print(f"Kofi's balance is ${kofi_balance}.00") # $820.00
+    # Method overriding
+    def withdraw(self, amount):
+        if amount <= self.get_balance() + self.overdraft_limit:
+            new_balance = self.get_balance() - amount
+
+            print(f"{amount} withdrawn using overdraft policy.")
+
+            self._Account__balance = new_balance
+
+        else:
+            print("Overdraft limit reached")
 
 
-# In our next session on Tuesday, we will explore Inheritance and Polymorphism 
-# by creating different types of accounts (e.g., SavingsAccount, CheckingAccount) 
-# that inherit from the Account class and override certain methods.
+accounts = [
+    SavingAccount("Kingsley", 1000),
+    CheckingAccount("Mary", 500)
+]
+
+for acc in accounts:
+    acc.withdraw(200)
